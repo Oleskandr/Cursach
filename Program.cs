@@ -465,4 +465,3 @@ public class Program {
         return $"{users[0]}_{users[1]}"; // Приклад: "Alice_Bob"
     }
 }
- 
