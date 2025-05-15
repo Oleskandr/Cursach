@@ -12,6 +12,9 @@ public sealed partial class MainWindow : IPConnectionWindow, ISetSizeAddTitle
     
     // Вікно для чату
     private ChatWindow chatWindow;
+
+    // Вікно вітання
+    private AcceptWindow acceptWindow;
     
     // TCP клієнт для підключення до сервера
     private TcpClient tcpClient = null;
