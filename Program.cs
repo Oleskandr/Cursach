@@ -222,7 +222,7 @@ public class Program {
                             string userName = match.Groups[1].Value;
                             string selectedUser = match.Groups[2].Value;
 
-                            Console.WriteLine($"Запит на чат між {userName} та {selectedUser}");
+                            Console.WriteLine($"Quere between {userName} and {selectedUser}");
 
                             // Отримуємо та надсилаємо повідомлення чату
                             string chatMessages = GetChatMessages(userName, selectedUser, chats);
@@ -231,7 +231,7 @@ public class Program {
                         }
                         else
                         {
-                            responseBytes = Encoding.UTF8.GetBytes("ERROR: Невірний формат запиту чату");
+                            responseBytes = Encoding.UTF8.GetBytes("ERROR: Uncorrected format of chat");
                             clientSocket.Send(responseBytes);
                         }
                     }
@@ -268,13 +268,13 @@ public class Program {
                 clientSocket.Close();
             }            
             else {
-                Console.WriteLine("Клієнт не підключився за 60 секунд");
+                Console.WriteLine("Client hasn't connected for 60 seconds");
             }
         }
         catch (SocketException se) {
             // Обробка тайм-ауту з'єднання
             if (se.SocketErrorCode == SocketError.TimedOut) {
-                Console.WriteLine("Клієнт не підключився за 60 секунд");
+                Console.WriteLine("Client hasn't connected for 60 seconds");
             } else {
                 Console.WriteLine("Socket Exception: " + se.Message);
             }
@@ -306,7 +306,7 @@ public class Program {
             // Перевіряємо чи існує JSON файл
             if (!File.Exists(jsonFilePath))
             {
-                return "ERROR: Файл з повідомленнями не знайдено";
+                return "ERROR: File with message not found";
             }
 
             // Читаємо та десеріалізуємо JSON файл
@@ -315,7 +315,7 @@ public class Program {
 
             if (allMessages == null)
             {
-                return "ERROR: Помилка десеріалізації JSON";
+                return "ERROR: Error of desirialization JSON";
             }
 
             // Фільтруємо повідомлення між вказаними користувачами
@@ -336,7 +336,7 @@ public class Program {
             // Створюємо результуючий рядок
             if (chatMessages.Count == 0)
             {
-                return "Повідомлень не знайдено";
+                return "Messages not found";
             }
 
             // Формуємо відформатований список повідомлень
@@ -455,13 +455,5 @@ public class Program {
         {
             Console.WriteLine($"Error: {ex.Message}");
         }
-    }
-
-    // Допоміжний метод для створення унікального ключа чату
-    private string GetChatKey(string user1, string user2)
-    {
-        // Сортуємо імена користувачів для забезпечення узгодженого ключа незалежно від порядку
-        var users = new[] { user1, user2 }.OrderBy(u => u).ToArray();
-        return $"{users[0]}_{users[1]}"; // Приклад: "Alice_Bob"
     }
 }
