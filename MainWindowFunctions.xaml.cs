@@ -476,6 +476,9 @@ public sealed partial class MainWindow : IPConnectionWindow, ISetSizeAddTitle
                 {
                     LogMessage("Server response: OK", Colors.Green);
 
+                    acceptWindow = new AcceptWindow();
+                    acceptWindow.Show();
+
                     // Створення нового вікна ChatWindow
                     chatWindow = new ChatWindow();
                     chatWindow.Owner = this;
